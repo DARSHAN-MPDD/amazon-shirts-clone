@@ -1,0 +1,38 @@
+[
+    {
+        "id": 1,
+        "name": "Classic White Shirt",
+        "price": 29.99,
+        "imageUrl": "https://example.com/images/classic-white-shirt.jpg"
+    },
+    {
+        "id": 2,
+        "name": "Casual Blue Shirt",
+        "price": 34.99,
+        "imageUrl": "https://example.com/images/casual-blue-shirt.jpg"
+    },
+    {
+        "id": 3,
+        "name": "Formal Black Shirt",
+        "price": 39.99,
+        "imageUrl": "https://example.com/images/formal-black-shirt.jpg"
+    },
+    {
+        "id": 4,
+        "name": "Striped Red Shirt",
+        "price": 24.99,
+        "imageUrl": "https://example.com/images/striped-red-shirt.jpg"
+    },
+    {
+        "id": 5,
+        "name": "Graphic Tee",
+        "price": 19.99,
+        "imageUrl": "https://example.com/images/graphic-tee.jpg"
+    },
+    {
+        "id": 6,
+        "name": "Denim Shirt",
+        "price": 49.99,
+        "imageUrl": "https://example.com/images/denim-shirt.jpg"
+    }
+]
