@@ -1,82 +1,30 @@
 import React, { useState } from "react";
 import ReactDOM from "react-dom";
 
-const shirtNames = [
-  "Classic White Shirt",
-  "Blue Denim Shirt",
-  "Checked Casual Shirt",
-  "Black Formal Shirt",
-  "Red Flannel Shirt",
-  "Green Polo Shirt",
-  "Grey Linen Shirt",
-  "Yellow Casual Shirt",
-  "Navy Blue Shirt",
-  "Purple Slim Fit Shirt",
-  "Orange Summer Shirt",
-  "Pink Party Shirt",
-  "Brown Corduroy Shirt",
-  "Olive Green Shirt",
-  "Sky Blue Shirt",
-  "White Linen Shirt",
-  "Black Polo Shirt",
-  "Grey Slim Fit Shirt",
-  "Red Checked Shirt",
-  "Blue Striped Shirt",
-  "Classic Black Shirt",
-  "Light Blue Shirt",
-  "Green Checked Shirt",
-  "Formal White Shirt",
-  "Casual Red Shirt",
-  "Yellow Polo Shirt",
-  "Grey Formal Shirt",
-  "Blue Casual Shirt",
-  "Navy Checked Shirt",
-  "Purple Polo Shirt",
-  "Orange Checked Shirt",
-  "Pink Slim Fit Shirt",
-  "Brown Formal Shirt",
-  "Olive Polo Shirt",
-  "Sky Checked Shirt",
-  "White Polo Shirt",
-  "Black Checked Shirt",
-  "Grey Polo Shirt",
-  "Red Slim Fit Shirt",
-  "Blue Linen Shirt",
-  "Classic Navy Shirt",
-  "Light Checked Shirt",
-  "Green Slim Fit Shirt",
-  "Formal Black Shirt",
-  "Casual Blue Shirt",
-  "Yellow Slim Fit Shirt",
-  "Grey Checked Shirt",
-  "Blue Party Shirt",
-  "Navy Slim Fit Shirt",
-  "Purple Checked Shirt",
-];
+// Function to generate a random Unsplash image URL
+const getRandomImage = (keyword) =>
+  `https://source.unsplash.com/random/400x180/?shirt,${keyword},clothing&sig=${Math.floor(
+    Math.random() * 1000
+  )}`;
 
-const shirtImages = [
-  "https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=400&q=80", // Classic White Shirt
-  "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=400&q=80", // Blue Denim Shirt
-  "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=400&q=80", // Checked Casual Shirt
-  "https://images.unsplash.com/photo-1469398715555-76331a6c7c9b?auto=format&fit=crop&w=400&q=80", // Black Formal Shirt
-  "https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&w=400&q=80", // Red Flannel Shirt
-  "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=400&q=80", // Green Polo Shirt
-  "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=400&q=80", // Grey Linen Shirt
-  "https://images.unsplash.com/photo-1465101178521-c1a9136a3b99?auto=format&fit=crop&w=400&q=80", // Yellow Casual Shirt
-  "https://images.unsplash.com/photo-1526178613658-3f1622045557?auto=format&fit=crop&w=400&q=80", // Navy Blue Shirt
-  "https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=400&q=80", // Purple Slim Fit Shirt
-  // ...add more if you want...
-];
+// Generate 100 shirts with various fields
+const categories = ["Casual", "Formal", "Flannel", "Denim", "Striped", "Plain"];
+const colors = ["Red", "Blue", "Green", "Black", "White", "Grey"];
 
-// For the rest, generate unique Unsplash images using the shirt name and index
-const shirts = shirtNames.map((name, idx) => ({
-  id: idx + 1,
-  name,
-  price: 499 + (idx % 7) * 50 + (idx % 3) * 100,
-  image:
-    shirtImages[idx] ||
-    `https://source.unsplash.com/400x180/?shirt,${encodeURIComponent(name)},${idx}`,
-}));
+const shirts = Array.from({ length: 100 }, (_, i) => {
+  const category = categories[i % categories.length];
+  const color = colors[i % colors.length];
+  return {
+    id: i + 1,
+    name: `${color} ${category} Shirt`,
+    price: 400 + Math.floor(Math.random() * 300),
+    image: getRandomImage(color),
+    category,
+    color,
+    inventory: Math.floor(Math.random() * 50) + 1,
+    discount: Math.random() > 0.7 ? `${Math.floor(Math.random() * 30) + 10}% off` : null,
+  };
+});
 
 function App() {
   const [search, setSearch] = useState("");
@@ -103,6 +51,7 @@ function App() {
       >
         Amazon Shirts Clone
       </h1>
+
       <div
         style={{
           display: "flex",
@@ -127,6 +76,7 @@ function App() {
           }}
         />
       </div>
+
       <div
         style={{
           display: "grid",
@@ -155,25 +105,21 @@ function App() {
                 borderRadius: 16,
                 boxShadow: "0 4px 16px rgba(0,0,0,0.08)",
                 padding: "1rem",
-                transition:
-                  "transform 0.2s, box-shadow 0.2s",
+                transition: "transform 0.2s, box-shadow 0.2s",
                 cursor: "pointer",
                 border: "1px solid #e3e3e3",
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
-                minHeight: 350,
+                minHeight: 380,
               }}
               onMouseOver={(e) => {
-                e.currentTarget.style.transform =
-                  "translateY(-8px) scale(1.03)";
-                e.currentTarget.style.boxShadow =
-                  "0 8px 32px rgba(35,47,62,0.15)";
+                e.currentTarget.style.transform = "translateY(-8px) scale(1.03)";
+                e.currentTarget.style.boxShadow = "0 8px 32px rgba(35,47,62,0.15)";
               }}
               onMouseOut={(e) => {
                 e.currentTarget.style.transform = "";
-                e.currentTarget.style.boxShadow =
-                  "0 4px 16px rgba(0,0,0,0.08)";
+                e.currentTarget.style.boxShadow = "0 4px 16px rgba(0,0,0,0.08)";
               }}
             >
               <img
@@ -203,6 +149,17 @@ function App() {
               >
                 {shirt.name}
               </h2>
+              <p style={{ color: "#555", fontSize: "0.95rem", margin: "0 0 0.5rem 0" }}>
+               
+              </p>
+              <p style={{ fontSize: "0.85rem", color: "#333" }}>Category: {shirt.category}</p>
+              <p style={{ fontSize: "0.85rem", color: "#333" }}>Color: {shirt.color}</p>
+              <p style={{ fontSize: "0.85rem", color: "#333" }}>In Stock: {shirt.inventory}</p>
+              {shirt.discount && (
+                <p style={{ color: "#d32f2f", fontWeight: "bold", fontSize: "0.9rem" }}>
+                  {shirt.discount}
+                </p>
+              )}
               <p
                 style={{
                   color: "#b12704",
